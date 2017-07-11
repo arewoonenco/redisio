@@ -38,6 +38,8 @@ def configure
   end
   version_hash = RedisioHelper.version_to_hash(current_version)
 
+  templates = node['redisio']['templates']
+
   # Setup a configuration file and init script for each configuration provided
   new_resource.servers.each do |current_instance|
     # Retrieve the default settings hash and the current server setups settings hash.
@@ -318,7 +320,7 @@ def configure
       when 'initd'
         template "/etc/init.d/redis#{server_name}" do
           source 'redis.init.erb'
-          cookbook 'redisio'
+          cookbook templates['redis.init.erb'] || 'redisio'
           owner 'root'
           group 'root'
           mode '0755'

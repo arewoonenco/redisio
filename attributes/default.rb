@@ -179,3 +179,6 @@ default['redisio']['bin_path'] = if node['redisio']['package_install']
                                  else
                                    '/usr/local/bin'
                                  end
+
+default['redisio']['templates'] = {}
+
